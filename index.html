@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Axel's Miscellaneous Tools</title>
+        <link
+            rel="stylesheet"
+            href="https://ka-f.fontawesome.com/releases/v6.0.0/css/free.min.css?token=0011e611c6"
+        />
+    </head>
+    <body>
+        <style>
+            body, html {
+                margin: 0px;
+                padding: 0px;
+                background-color: #222;
+                color: white;
+                font-family: monospace;
+            }
+            a {
+                position: relative;
+                background-color: teal;
+                border-width: 0px;
+                border-radius: 4px;
+                cursor: pointer;
+                padding: 6px;
+                overflow: hidden;
+                font-family: monospace;
+                font-size: 14px;
+                color: white;
+                text-decoration: none;
+            }
+            a::before {
+                position: absolute;
+                content: "";
+                top: 0px;
+                left: 0px;
+                bottom: 0px;
+                right: 0px;
+                transition: background-color 150ms linear;
+                pointer-events: none;
+            }
+            a:active::before {
+                background-color: rgba(255, 255, 255, 0.5);
+                transition: none;
+            }
+            a:visited {
+                color: white;
+            }
+            div.app {
+                width: 260px;
+                display: flex;
+                flex-direction: column;
+                padding: 4px;
+                gap: 4px;
+            }
+        </style>
+        <div class="app">
+            <a href="asuid" target="_blank">
+                <span class="fa-solid fa-arrow-up-right-from-square"></span>
+                ASUID Generator
+            </a>
+        </div>
+    </body>
+</html>
