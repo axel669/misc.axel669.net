@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ASUID Generator</title>
+    </head>
+    <body>
+        <style>
+            body, html {
+                margin: 0px;
+                padding: 0px;
+                background-color: #222;
+                color: white;
+                font-family: monospace;
+            }
+            button {
+                position: relative;
+                background-color: teal;
+                border-width: 0px;
+                border-radius: 4px;
+                cursor: pointer;
+                padding: 6px;
+                overflow: hidden;
+                font-family: monospace;
+                font-size: 14px;
+            }
+            button::before {
+                position: absolute;
+                content: "";
+                top: 0px;
+                left: 0px;
+                bottom: 0px;
+                right: 0px;
+                transition: background-color 150ms linear;
+                pointer-events: none;
+            }
+            button:active::before {
+                background-color: rgba(255, 255, 255, 0.5);
+                transition: none;
+            }
+            div.hidden.hidden {
+                display: none;
+            }
+            div.hidden::after {
+                content: "Loading...";
+            }
+            div.app {
+                width: 260px;
+                display: flex;
+                flex-direction: column;
+                padding: 4px;
+                gap: 4px;
+            }
+        </style>
+        <div class="hidden app">
+            <button>Generate ASUID</button>
+            <div class="result"></div>
+        </div>
+        <script type="module">
+            import asuid from "https://cdn.jsdelivr.net/npm/@labyrinthos/asuid@0.2.0"
+
+            const app = document.querySelector("body > div")
+            const button = app.querySelector("button")
+            const result = app.querySelector(".result")
+
+            button.addEventListener(
+                "click",
+                () => result.innerText = asuid()
+            )
+
+            app.classList.remove("hidden")
+        </script>
+    </body>
+</html>
