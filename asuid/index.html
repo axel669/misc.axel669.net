@@ -1,73 +1,34 @@
 <!doctype html>
 <html>
     <head>
+        <meta name="viewport" content="initial-scale=1,maximum-scale=5,minimum-scale=1,width=device-width">
         <title>ASUID Generator</title>
     </head>
-    <body>
-        <style>
-            body, html {
-                margin: 0px;
-                padding: 0px;
-                background-color: #222;
-                color: white;
-                font-family: monospace;
-            }
-            button {
-                position: relative;
-                background-color: teal;
-                border-width: 0px;
-                border-radius: 4px;
-                cursor: pointer;
-                padding: 6px;
-                overflow: hidden;
-                font-family: monospace;
-                font-size: 14px;
-            }
-            button::before {
-                position: absolute;
-                content: "";
-                top: 0px;
-                left: 0px;
-                bottom: 0px;
-                right: 0px;
-                transition: background-color 150ms linear;
-                pointer-events: none;
-            }
-            button:active::before {
-                background-color: rgba(255, 255, 255, 0.5);
-                transition: none;
-            }
-            div.hidden.hidden {
-                display: none;
-            }
-            div.hidden::after {
-                content: "Loading...";
-            }
-            div.app {
-                width: 260px;
-                display: flex;
-                flex-direction: column;
-                padding: 4px;
-                gap: 4px;
-            }
-        </style>
-        <div class="hidden app">
-            <button>Generate ASUID</button>
-            <div class="result"></div>
-        </div>
+    <body ws-x="@app theme[tron]">
+        <script src="https://cdn.jsdelivr.net/npm/@axel669/windstorm@0.1.5/dist/browser.js"></script>
         <script type="module">
             import asuid from "https://cdn.jsdelivr.net/npm/@labyrinthos/asuid@0.2.0"
+            import { html, render, useState } from "https://esm.sh/htm/preact/standalone"
 
-            const app = document.querySelector("body > div")
-            const button = app.querySelector("button")
-            const result = app.querySelector(".result")
+            const App = () => {
+                const [id, set] = useState("")
+                const generate = () => set(asuid())
 
-            button.addEventListener(
-                "click",
-                () => result.innerText = asuid()
-            )
+                return html`
+                    <ws-screen style="--screen-width: min(480px, 100%)">
+                        <ws-paper>
+                            <ws-flex slot="content">
+                                <button ws-x="@fill $color[primary]" onClick=${generate}>
+                                    Generate ASUID
+                                </button>
+                                <div>${id}</div>
+                            </ws-flex>
+                        </ws-paper>
+                    </ws-screen>
+                `
+            }
 
-            app.classList.remove("hidden")
+            render(html`<${App} />`, document.body)
         </script>
     </body>
 </html>
